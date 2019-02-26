@@ -11,7 +11,7 @@ export default {
   name: 'App'
 }
 </script>
-<style lang="scss">
-@import "./app.scss";
+<style lang="less">
+@import "./app.less";
 </style>
 
