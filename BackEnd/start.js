@@ -2,61 +2,68 @@ const http = require('http')
 const ip = require('ip')
 const config = require('config')
 const app = require('./app')
+const { connect } = require('./mongodb')
 
-const normalizePort = function normalizePort(val) {
-  const port = parseInt(val, 10)
+;
+(async () => {
+  // 连接数据库
+  await connect()
 
-  if (isNaN(port)) {
-    return val
+  const normalizePort = function normalizePort(val) {
+    const port = parseInt(val, 10)
+
+    if (isNaN(port)) {
+      return val
+    }
+
+    if (port >= 0) {
+      return port
+    }
+
+    return false
   }
 
-  if (port >= 0) {
-    return port
-  }
+  const port = normalizePort(config.get('app.port'))
+  const server = http.createServer(app.callback())
 
-  return false
-}
+  // ip
+  const host = config.get('env') === 'development' ? '0.0.0.0' : '127.0.0.1'
 
-const port = normalizePort(config.get('app.port'))
-const server = http.createServer(app.callback())
+  // 启动服务
+  server.listen(port, host)
 
-// ip
-const host = config.get('env') === 'development' ? '0.0.0.0' : '127.0.0.1'
-
-// 启动服务
-server.listen(port, host)
-
-// 错误处理
-server.on('error', (err) => {
-  if (err.syscall !== 'listen') {
-    throw err
-  }
-
-  const bind = typeof port === 'string' ?
-    `Pipe ${port}` :
-    `Port ${port}`
-
-  switch (err.code) {
-    case 'EACCES':
-      console.error(`${bind} requires elevated privileges`)
-      process.exit(1)
-      break
-    case 'EADDRINUSE':
-      console.error(`${bind} is already in use`)
-      process.exit(1)
-      break
-    default:
+  // 错误处理
+  server.on('error', (err) => {
+    if (err.syscall !== 'listen') {
       throw err
-  }
-})
+    }
 
-// 监听
-server.on('listening', () => {
-  const address = ip.address()
+    const bind = typeof port === 'string' ?
+      `Pipe ${port}` :
+      `Port ${port}`
 
-  if (config.get('app.debug')) {
-    console.log()
-    console.log(`Server is running at http://127.0.0.1:${port}`)
-    console.log(`Server is running at http://${address}:${port}`)
-  }
-})
+    switch (err.code) {
+      case 'EACCES':
+        console.error(`${bind} requires elevated privileges`)
+        process.exit(1)
+        break
+      case 'EADDRINUSE':
+        console.error(`${bind} is already in use`)
+        process.exit(1)
+        break
+      default:
+        throw err
+    }
+  })
+
+  // 监听
+  server.on('listening', () => {
+    const address = ip.address()
+
+    if (config.get('app.debug')) {
+      console.log()
+      console.log(`Server is running at http://127.0.0.1:${port}`)
+      console.log(`Server is running at http://${address}:${port}`)
+    }
+  })
+})()

@@ -17,10 +17,8 @@
             <BreadcrumbItem>Components</BreadcrumbItem>
             <BreadcrumbItem>Layout</BreadcrumbItem>
           </Breadcrumb>
-          <Card>
-            <div style="min-height: 600px">
-              <slot/>
-            </div>
+          <Card style="min-height: 83vh">
+            <slot/>
           </Card>
         </Content>
       </Layout>
@@ -44,10 +42,6 @@ export default {
     menuitemClasses: function() {
       return ['menu-item', this.isCollapsed ? 'collapsed-menu' : '']
     }
-  },
-  created () {},
-  mounted () {
-    console.log(this.$slots)
   }
 }
 </script>

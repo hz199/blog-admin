@@ -15,6 +15,11 @@ export default new Router({
         layout: AdminLayout,
         content: () => import('@/views/Home.vue')
       }
+    },
+    {
+      path: '/auth/login',
+      name: 'Login',
+      component: () => import('@/views/Auth')
     }
   ]
 })

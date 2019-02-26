@@ -2,7 +2,7 @@
   <div id="app">
     <router-view></router-view>
     <router-view name="layout">
-      <router-view name="centent"></router-view>
+      <router-view name="content"></router-view>
     </router-view>
   </div>
 </template>
@@ -11,3 +11,7 @@ export default {
   name: 'App'
 }
 </script>
+<style lang="scss">
+@import "./app.scss";
+</style>
+

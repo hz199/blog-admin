@@ -3,5 +3,8 @@ module.exports = {
   app: {
     debug: false,
     port: 8089,
+  },
+  db: {
+    URL: 'mongodb://localhost/reactBlog'
   }
 }
