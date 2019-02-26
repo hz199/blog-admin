@@ -1,12 +1,12 @@
 <template>
   <div class="home">
-    <AdminLayout></AdminLayout>
+    5444444444
   </div>
 </template>
 
 <script>
 export default {
-  name: 'home'
+  name: 'Home'
 }
 </script>
 <style lang="scss" scoped>

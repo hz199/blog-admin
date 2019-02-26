@@ -1,7 +1,5 @@
-import AdminLayout from './AdminLayout'
 
 const components = [
-  AdminLayout
 ]
 
 const install = function install (Vue) {

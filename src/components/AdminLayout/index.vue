@@ -4,7 +4,8 @@
 <template>
   <div class="layout">
     <Layout :style="{minHeight: '100vh'}">
-      <Sider collapsible :collapsed-width="78" v-model="isCollapsed">
+      <!-- <Sider collapsible :collapsed-width="78" v-model="isCollapsed"> -->
+      <Sider>
         <div style="height:50px;">22</div>
         <subMenu :menuitemClasses="menuitemClasses"/>
       </Sider>
@@ -17,7 +18,9 @@
             <BreadcrumbItem>Layout</BreadcrumbItem>
           </Breadcrumb>
           <Card>
-            <div style="min-height: 600px">Content</div>
+            <div style="min-height: 600px">
+              <slot/>
+            </div>
           </Card>
         </Content>
       </Layout>
@@ -29,7 +32,7 @@ import subMenu from './subMenu'
 
 export default {
   name: 'AdminLayout',
-  data() {
+  data () {
     return {
       isCollapsed: false
     }
@@ -41,6 +44,10 @@ export default {
     menuitemClasses: function() {
       return ['menu-item', this.isCollapsed ? 'collapsed-menu' : '']
     }
+  },
+  created () {},
+  mounted () {
+    console.log(this.$slots)
   }
 }
 </script>
