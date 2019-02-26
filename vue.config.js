@@ -11,5 +11,10 @@ module.exports = {
         changeOrigin: true
       }
     }
+  },
+  // 额外添加 loader
+  chainWebpack: (config) => {
+    config.module
+      .rule('sass-loader').test(/\.(scss|sass)$/)
   }
 }
