@@ -24,7 +24,7 @@ module.exports = {
         plugins: [
           new compressionWebpackPlugin({
             test: /\.(js|css)$/,
-            threshold: 6000,
+            threshold: 10240,
             deleteOriginalAssets: true
           })
         ]
