@@ -27,7 +27,7 @@ const { connect } = require('./mongodb')
   const server = http.createServer(app.callback())
 
   // ip
-  const host = config.get('env') === 'development' ? '127.0.0.1' : '0.0.0.0'
+  const host = config.get('env') === 'development' ? '0.0.0.0' : '127.0.0.1'
 
   // 启动服务
   server.listen(port, host)
