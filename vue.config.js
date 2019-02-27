@@ -18,13 +18,12 @@ module.exports = {
       .rule('less-loader').test(/\.less$/)
   },
   // 代码gizp压缩
-  configureWebpack: (config) => {
+  configureWebpack: () => {
     if (process.env.NODE_ENV === 'production') {
-      console.log(config, 11111111111111)
       return {
         plugins: [
           new compressionWebpackPlugin({
-            test: '/\.js$|\.html$|\.css/',
+            test: /\.(js|css)$/,
             threshold: 6000,
             deleteOriginalAssets: true
           })
