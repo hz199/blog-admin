@@ -4,6 +4,7 @@ const logger = require('koa-logger')
 const json = require('koa-json')
 const bodyParser = require('koa-bodyparser')
 // const koaBody = require('koa-body')
+const session = require('koa-session')
 const staticService = require('koa-static')
 const config = require('config')
 const router = require('./routes')
@@ -32,6 +33,20 @@ app.use(bodyParser({
 //     maxFileSize: 2 * 1024 * 1024    // 设置上传文件大小最大限制，默认2M
 //   }
 // }))
+
+app.keys = config.get('app.keys')
+const sessionConfig = {
+  key: config.get('app.sessionKey'),
+  maxAge: 1000 * 60,
+  // maxAge: 5000,
+  overwrite: true,
+  httpOnly: true,
+  signed: true,
+  rolling: false,
+  renew: false
+}
+
+app.use(session(sessionConfig, app))
 
 errorHandler(app)
 

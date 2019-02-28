@@ -33,7 +33,7 @@
                   </FormItem>
                   <FormItem class="clearfix">
                     <Button class="pull-left" @click="register('formUser')">注册</Button>
-                    <Button type="primary" class="pull-right">登录</Button>
+                    <Button type="primary" class="pull-right" @click="login('formUser')">登录</Button>
                   </FormItem>
                 </Form>
               </div>
@@ -73,6 +73,17 @@ export default {
           })
         } else {
           this.$Message.error('请填写账号或者密码！')
+        }
+      })
+    },
+    login (name) {
+      this.$refs[name].validate(valid => {
+        if (valid) {
+          usersServices.login(this.postData).then(res => {
+            console.log(res)
+          })
+        } else {
+          this.$Message.error('登录失败，请检查账号、密码~')
         }
       })
     }

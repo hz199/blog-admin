@@ -9,3 +9,5 @@ exports.createUser = (data) => {
 exports.queryUserCount = () => Users.find({}).count().exec()
 
 exports.queryOneWithId = id => Users.findOne({ _id: id}).exec()
+
+exports.queryOneWithEmail = email => Users.findOne({ email: email}).exec()
