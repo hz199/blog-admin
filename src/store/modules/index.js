@@ -1,2 +1,6 @@
+import auth from './auth'
 
-export default {}
+
+export default {
+  auth
+}

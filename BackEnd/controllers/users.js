@@ -87,6 +87,7 @@ exports.login = async function login (ctx) {
       const token = createToken({userName: body.userName}, body.email)
 
       ctx.session.token = token
+      ctx.session.userId = userInfo._id
       ctx.body = {
         error: 0,
         token,
@@ -108,22 +109,15 @@ exports.login = async function login (ctx) {
  * @param
  */
 exports.findUserInfo = async function findUserInfo (ctx) {
-  const { userId } = ctx.query
-
-  if (!userId) {
-    ctx.throw(400, '存在非法请求参数')
-    return
-  }
-
   let userInfo
+  const userId = ctx.session.userId
 
   try {
     userInfo = await usersProxy.queryOneWithId(userId)
-    const { password, ...userMessage } = userInfo
 
     ctx.body = {
       error: 0,
-      result: userMessage
+      result: userInfo
     }
     return
   } catch(err) {

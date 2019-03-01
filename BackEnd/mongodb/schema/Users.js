@@ -1,4 +1,5 @@
 const mongoose = require('mongoose')
+const moment = require('moment')
 const Schema = mongoose.Schema
 
 const userSchema = new Schema({
@@ -15,21 +16,21 @@ const userSchema = new Schema({
   },
   meta: {
     createAt: {
-      type: Date,
-      default: Date.now()
+      type: String,
+      default: moment(Date.now()).format('YYYY-MM-DD HH:mm:ss')
     },
     updateAt: {
-      type: Date,
-      default: Date.now()
+      type: String,
+      default: moment(Date.now()).format('YYYY-MM-DD HH:mm:ss')
     }
   }
 })
 
 userSchema.pre('save', async function (next) {
   if (this.isNew) {
-    this.meta.createAt = this.meta.updateAt = Date.now()
+    this.meta.createAt = this.meta.updateAt = moment(Date.now()).format('YYYY-MM-DD HH:mm:ss')
   } else {
-    this.meta.updateAt = Date.now()
+    this.meta.updateAt = moment(Date.now()).format('YYYY-MM-DD HH:mm:ss')
   }
 
   await next()

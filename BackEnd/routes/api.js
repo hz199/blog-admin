@@ -12,6 +12,6 @@ router.post('/test', loginRequired, testCtrl.Test)
 // users
 router.post('/register', users.register)
 router.post('/login', users.login)
-router.post('/userInfo', loginRequired, users.findUserInfo)
+router.get('/userInfo', loginRequired, users.findUserInfo)
 
 module.exports = router

@@ -47,6 +47,7 @@
 </template>
 <script>
 import * as usersServices from '@/services/users'
+import LocalStarage from '@/utils/localStorage'
 
 export default {
   data () {
@@ -80,7 +81,11 @@ export default {
       this.$refs[name].validate(valid => {
         if (valid) {
           usersServices.login(this.postData).then(res => {
-            console.log(res)
+            LocalStarage.setItem('adminToken', res.token)
+            this.$Message.success('登录成功~')
+            this.$router.push({
+              path: '/'
+            })
           })
         } else {
           this.$Message.error('登录失败，请检查账号、密码~')

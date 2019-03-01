@@ -27,6 +27,7 @@
 </template>
 <script>
 import subMenu from './subMenu'
+import { mapActions } from 'vuex'
 
 export default {
   name: 'AdminLayout',
@@ -42,6 +43,14 @@ export default {
     menuitemClasses: function() {
       return ['menu-item', this.isCollapsed ? 'collapsed-menu' : '']
     }
+  },
+  methods: {
+    ...mapActions([
+      'getUserInfo'
+    ])
+  },
+  created () {
+    this.getUserInfo({userName: 44444})
   }
 }
 </script>

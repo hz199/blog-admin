@@ -37,7 +37,7 @@ app.use(bodyParser({
 app.keys = config.get('app.keys')
 const sessionConfig = {
   key: config.get('app.sessionKey'),
-  maxAge: 1000 * 60,
+  maxAge: 1000 * 60 * 60 * 24,
   // maxAge: 5000,
   overwrite: true,
   httpOnly: true,
