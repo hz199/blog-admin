@@ -10,8 +10,7 @@ const routes = [
     name: 'Login',
     component: () => import('../views/Auth/Login.vue'),
     meta: {
-      title: '登录',
-      rules: ['loginRequired']
+      title: '登录'
     }
   },
   {
@@ -22,8 +21,18 @@ const routes = [
       content: () => import('@/views/Home.vue')
     },
     meta: {
-      title: '首页',
-      rules: ['loginRequired']
+      title: '首页'
+    }
+  },
+  {
+    path: '/article',
+    name: 'Article',
+    components: {
+      layout: AdminLayout,
+      content: () => import('@/views/Article/Article.vue')
+    },
+    meta: {
+      title: '文章管理'
     }
   },
 ]

@@ -4,24 +4,11 @@ const menu = [
     path: '/'
   },
   {
-    title: '测试1',
+    title: '文章管理',
     subMenu: [
       {
-        title: '测试1sub',
-        path: '/'
-      }
-    ]
-  },
-  {
-    title: '测试2',
-    subMenu: [
-      {
-        title: '测试1sub',
-        path: '/'
-      },
-      {
-        title: '测试2sub',
-        path: '/'
+        title: '文章管理',
+        path: '/article'
       }
     ]
   }

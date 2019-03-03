@@ -1,5 +1,7 @@
+import AdminTable from './AdminTable'
 
 const components = [
+  AdminTable
 ]
 
 const install = function install (Vue) {

@@ -17,7 +17,9 @@ export default {
   },
   methods: {
     selectMenuName (path) {
-      console.log(path, 1111)
+      this.$router.push({
+        path
+      })
     }
   },
   render () {
