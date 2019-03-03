@@ -1,7 +1,9 @@
 import AdminTable from './AdminTable'
+import Notification from './Notification'
 
 const components = [
-  AdminTable
+  AdminTable,
+  Notification
 ]
 
 const install = function install (Vue) {

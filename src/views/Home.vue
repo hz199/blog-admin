@@ -1,6 +1,7 @@
 <template>
   <div class="home">
-    <AdminTable :tableColumns="tableColumns" :tableData="tableData"/>
+    <!-- <AdminTable :tableColumns="tableColumns" :tableData="tableData"/> -->
+    <Notification content="测试notify"/>
   </div>
 </template>
 
