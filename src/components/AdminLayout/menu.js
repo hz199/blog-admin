@@ -1,13 +1,13 @@
 const menu = [
   {
-    title: '首页',
+    title: 'home',
     path: '/'
   },
   {
-    title: '文章管理',
+    title: 'Article',
     subMenu: [
       {
-        title: '文章管理',
+        title: 'Article',
         path: '/article'
       }
     ]
