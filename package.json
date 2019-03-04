@@ -8,7 +8,8 @@
     "dev:server": "nodemon ./BackEnd/start.js",
     "prod": "node ./BackEnd/start.js",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "pm2": "git pull origin master && yarn build && pm2 reload myBlogAdmin && pm2 list"
   },
   "dependencies": {
     "ajv": "^6.9.2",
