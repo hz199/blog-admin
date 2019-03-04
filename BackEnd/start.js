@@ -2,12 +2,12 @@ const http = require('http')
 const ip = require('ip')
 const config = require('config')
 const app = require('./app')
-// const { connect } = require('./mongodb')
+const { connect } = require('./mongodb')
 
 ;
 (async () => {
   // 连接数据库
-  // await connect()
+  await connect()
 
   const normalizePort = function normalizePort(val) {
     const port = parseInt(val, 10)

@@ -1,17 +1,19 @@
 import AdminTable from './AdminTable'
-import Notification from './Notification'
+import NotificationCtrl from './Notification'
 
 const components = [
   AdminTable,
-  Notification
+  NotificationCtrl.Notification
 ]
 
 const install = function install (Vue) {
   if (install.installed) return
-
   components.forEach((component) => {
     Vue.component(component.name, component)
   })
+
+  // 函数式调用
+  Vue.prototype.$adminNotify = NotificationCtrl.notify
 }
 
 export default {

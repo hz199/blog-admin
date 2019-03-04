@@ -24,10 +24,10 @@ instance.interceptors.request.use((config) => {
 instance.interceptors.response.use((response) => {
   return Promise.resolve(response.data)
 }, (err) => {
-  // if (err.response.status === 401) {
-  //   window.location.href = '/auth/login'
-  //   return
-  // }
+  if (err.response.status === 401) {
+    window.location.href = '/auth/login'
+    return
+  }
   return Promise.reject(err.response.data)
 })
 
