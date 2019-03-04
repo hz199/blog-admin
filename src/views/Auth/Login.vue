@@ -32,7 +32,7 @@
                     </Input>
                   </FormItem>
                   <FormItem class="clearfix">
-                    <Button class="pull-left" @click="register('formUser')">注册</Button>
+                    <!-- <Button class="pull-left" @click="register('formUser')">注册</Button> -->
                     <Button type="primary" class="pull-right" @click="login('formUser')">登录</Button>
                   </FormItem>
                 </Form>
