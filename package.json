@@ -9,7 +9,7 @@
     "prod": "node ./BackEnd/start.js",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "pm2": "git pull origin master && yarn build && pm2 reload myBlogAdmin && pm2 list"
+    "pm2": "git pull origin master && yarn install && yarn build && pm2 reload myBlogAdmin && pm2 list"
   },
   "dependencies": {
     "ajv": "^6.9.2",
