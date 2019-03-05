@@ -15,6 +15,10 @@ const articleSchema = new Schema({
     type: String,
     required: true
   },
+  articleContentHtml: {
+    type: String,
+    required: true
+  },
   tags: {
     type: Array,
     required: true

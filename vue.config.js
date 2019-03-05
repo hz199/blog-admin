@@ -18,7 +18,7 @@ module.exports = {
     config.module
       .rule('less-loader').test(/\.less$/)
   },
-  // 代码gizp压缩
+  // 代码gzip压缩
   configureWebpack: () => {
     if (process.env.NODE_ENV === 'production') {
       return {
