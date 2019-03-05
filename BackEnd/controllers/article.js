@@ -55,6 +55,9 @@ exports.createArticle = async function createArticle (ctx) {
  */
 exports.findAllArticle = async function findAllArticle (ctx) {
   const pageOption = pages.parse(ctx.query)
+
+  console.log(pageOption, 111111111111)
+
   let response
 
   try {
@@ -70,7 +73,8 @@ exports.findAllArticle = async function findAllArticle (ctx) {
             describe: item.describe,
             tags: item.tags,
             title: item.title,
-            createAt: item.meta.createAt
+            createAt: item.meta.createAt,
+            id: item._id
           }
         }),
         pages: {

@@ -25,16 +25,27 @@ const routes = [
     }
   },
   {
-    path: '/article',
+    path: '/article/:id',
     name: 'Article',
     components: {
       layout: AdminLayout,
       content: () => import('@/views/Article/Article.vue')
     },
     meta: {
-      title: '文章管理'
+      title: '文章管理编辑'
     }
   },
+  {
+    path: '/article',
+    name: 'Articles',
+    components: {
+      layout: AdminLayout,
+      content: () => import('@/views/Article/Articles.vue')
+    },
+    meta: {
+      title: '文章管理'
+    }
+  }
 ]
 
 // 权限限制规则
