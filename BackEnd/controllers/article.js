@@ -37,8 +37,14 @@ exports.createArticle = async function createArticle (ctx) {
     return
   }
 
+  const { _id } = ctx.request.body
+
   try {
-    await articlesProxy.createArticle(body)
+    if (_id) {
+      await articlesProxy.updateArticleById(_id, body)
+    } else {
+      await articlesProxy.createArticle(body)
+    }
     ctx.body = {
       error: 0,
       result: null
@@ -55,8 +61,6 @@ exports.createArticle = async function createArticle (ctx) {
  */
 exports.findAllArticle = async function findAllArticle (ctx) {
   const pageOption = pages.parse(ctx.query)
-
-  console.log(pageOption, 111111111111)
 
   let response
 
@@ -85,6 +89,50 @@ exports.findAllArticle = async function findAllArticle (ctx) {
     }
     return
   } catch(err) {
+    ctx.throw(err.status || 400, err)
+    return
+  }
+}
+
+// 查询当前某一篇文章
+exports.findOneArticle = async function findOneArticle (ctx) {
+  const { id } = ctx.params
+
+  if (!id) {
+    ctx.throw(400, '存在非法请求参数')
+    return
+  }
+
+  let response
+
+  try {
+    response = await articlesProxy.queryOneWithId(id)
+    ctx.body = {
+      code: 0,
+      result: response
+    }
+  } catch (err) {
+    ctx.throw(err.status || 400, err)
+    return
+  }
+}
+
+// 查询当前某一篇文章
+exports.deleteArticle = async function deleteArticle (ctx) {
+  const { id } = ctx.params
+
+  if (!id) {
+    ctx.throw(400, '存在非法请求参数')
+    return
+  }
+
+  try {
+    await articlesProxy.deleteWithId(id)
+    ctx.body = {
+      code: 0,
+      result: null
+    }
+  } catch (err) {
     ctx.throw(err.status || 400, err)
     return
   }

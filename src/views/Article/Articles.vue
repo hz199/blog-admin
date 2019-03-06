@@ -1,5 +1,11 @@
 <template>
   <div class="Articles">
+    <div class="add-wrapper">
+      <router-link to="/article/add">
+        <Button type="primary"><Icon type="md-add"></Icon>&nbsp;新增文章</Button>
+      </router-link>
+    </div>
+
     <AdminTable :tableColumns="tableColumns"
       :pageOption="articleData.pages"
       :tableData="articleData.articleList"
@@ -13,6 +19,8 @@ import * as aticleServices from '@/services/article'
 export default {
   name: 'Articles',
   data () {
+    const that = this
+
     return {
       tableColumns: [
         {
@@ -37,6 +45,22 @@ export default {
           title: '创建时间',
           key: 'createAt',
           align: 'center'
+        },
+        {
+          title: '操作',
+          align: 'center',
+          render (h, { row }) {
+            return (
+              <div>
+                <i-button type="error" size="small" onClick={() => {
+                  that.deleteArticle(row.id)
+                }}>删除</i-button>
+                <router-link to={`/article/${row.id}`}>
+                  <i-button style="margin-left: 5px" type="primary" size="small">编辑</i-button>
+                </router-link>
+              </div>
+            )
+          }
         }
       ],
       articleData: {}
@@ -52,6 +76,14 @@ export default {
     },
     handelPage (page) {
       this.getArticle(page)
+    },
+    deleteArticle (id) {
+      aticleServices.deleteArticle({ id }).then(() => {
+        this.$Message.success('删除成功~')
+        this.getArticle()
+      }).catch(err => {
+        console.log(err)
+      })
     }
   },
   created () {

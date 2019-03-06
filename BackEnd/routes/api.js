@@ -18,5 +18,7 @@ router.get('/userInfo', loginRequired, users.findUserInfo)
 // article
 router.post('/article', loginRequired, articles.createArticle)
 router.get('/article', loginRequired, articles.findAllArticle)
+router.post('/article/:id', loginRequired, articles.deleteArticle)
+router.get('/article/:id', loginRequired, articles.findOneArticle)
 
 module.exports = router

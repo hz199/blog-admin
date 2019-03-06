@@ -9,3 +9,13 @@ export const getArticles = function (payload) {
     params: payload
   })
 }
+
+export const deleteArticle = function ({ id, ...rest }) {
+  return axios.post(`/api/article/${id}`, rest)
+}
+
+export const findOneArticle = function ({ id, ...rest }) {
+  return axios.get(`/api/article/${id}`, {
+    params: rest
+  })
+}

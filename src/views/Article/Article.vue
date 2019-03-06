@@ -13,7 +13,10 @@
         </Select>
       </FormItem>
     </Form>
-    <MarkDown :autoSave="false" @on-save="markSave" theme="OneDark"></MarkDown>
+    <MarkDown
+      :autoSave="false"
+      :initialValue="postData.articleContent"
+      @on-save="markSave" theme="OneDark"></MarkDown>
     <div class="submit-wrapper clearfix">
       <div class="pull-right">
         <Button type="primary" @click="submit">提交</Button>
@@ -43,22 +46,27 @@ export default {
       this.postData.articleContentHtml = payload.htmlValue
     },
     submit () {
-      aticleServices.createArticle(this.postData).then(res => {
-        console.log(res)
+      aticleServices.createArticle(this.postData).then(() => {
+        this.$Message.success('提交文章成功~')
+        this.$router.push({
+          path: '/article'
+        })
       }).catch((err) => {
         console.log(err)
       })
     },
-    getArticle () {
-      aticleServices.getArticles().then(res => {
-        console.log(res)
-      }).catch(err => {
+    articleInfo () {
+      aticleServices.findOneArticle({id: this.$route.params.id}).then((res) => {
+        this.postData = res.result
+      }).catch((err) => {
         console.log(err)
       })
     }
   },
   created () {
-    this.getArticle()
+    if (this.$route.params.id !== 'add') {
+      this.articleInfo()
+    }
   }
 }
 </script>
