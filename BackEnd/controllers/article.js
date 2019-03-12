@@ -61,12 +61,15 @@ exports.createArticle = async function createArticle (ctx) {
  */
 exports.findAllArticle = async function findAllArticle (ctx) {
   const pageOption = pages.parse(ctx.query)
+  const body = _.pick(ctx.query, ['tag'])
+
+  const params = body.tag ? [body.tag] : []
 
   let response
 
   try {
     response = {
-      result: await articlesProxy.queryAll(pageOption),
+      result: await articlesProxy.queryAll(pageOption, params),
       count: await articlesProxy.queryCount()
     }
     ctx.body = {
@@ -83,7 +86,8 @@ exports.findAllArticle = async function findAllArticle (ctx) {
         }),
         pages: {
           countPage: response.count,
-          ...pageOption
+          ...pageOption,
+          totalPage: Math.ceil(response.count / pageOption.showCount)
         }
       }
     }
@@ -117,7 +121,7 @@ exports.findOneArticle = async function findOneArticle (ctx) {
   }
 }
 
-// 查询当前某一篇文章
+// 删除当前某一篇文章
 exports.deleteArticle = async function deleteArticle (ctx) {
   const { id } = ctx.params
 
@@ -132,6 +136,7 @@ exports.deleteArticle = async function deleteArticle (ctx) {
       code: 0,
       result: null
     }
+    return
   } catch (err) {
     ctx.throw(err.status || 400, err)
     return

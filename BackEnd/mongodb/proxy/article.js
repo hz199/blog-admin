@@ -6,8 +6,11 @@ exports.createArticle = (data) => {
   return Article.save()
 }
 
-exports.queryAll = option => {
-  return Articles.find()
+exports.queryAll = (option, tags) => {
+  console.log(tags)
+  let params = tags.length > 0 ? { tags } : {}
+
+  return Articles.find(params)
     .skip((option.currentPage - 1) * option.showCount)
     .limit(option.showCount)
     .sort({'_id': -1})
