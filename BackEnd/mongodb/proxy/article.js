@@ -7,7 +7,6 @@ exports.createArticle = (data) => {
 }
 
 exports.queryAll = (option, tags) => {
-  console.log(tags)
   let params = tags.length > 0 ? { tags } : {}
 
   return Articles.find(params)
