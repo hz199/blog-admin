@@ -63,14 +63,14 @@ exports.findAllArticle = async function findAllArticle (ctx) {
   const pageOption = pages.parse(ctx.query)
   const body = _.pick(ctx.query, ['tag'])
 
-  const params = body.tag ? [body.tag] : []
+  let params = body.tag ? { tags: {$regex: body.tag}} : {}
 
   let response
 
   try {
     response = {
       result: await articlesProxy.queryAll(pageOption, params),
-      count: await articlesProxy.queryCount()
+      count: await articlesProxy.queryCount(params)
     }
     ctx.body = {
       error: 0,
